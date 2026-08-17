@@ -1,0 +1,28 @@
+{
+    "name": "securost/supervio",
+    "type": "clientxcms-addon",
+    "description": "Page de statut Supervio pour ClientXCMS",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "App\\Addons\\Supervio\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "platform-check": false
+    },
+    "providers": [
+        {
+            "provider": "App\\Addons\\Supervio\\SupervioServiceProvider"
+        }
+    ],
+    "viewspaths": [
+        {
+            "viewspaths": "views"
+        }
+    ]
+}

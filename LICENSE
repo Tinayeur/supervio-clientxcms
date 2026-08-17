@@ -1,0 +1,100 @@
+LICENCE SUPERVIO POUR CLIENTXCMS
+
+Copyright (c) 2026 Securost. Tous droits réservés.
+
+Le présent logiciel — l'addon « Supervio pour ClientXCMS », ci-après « le Logiciel » —
+comprend son code source, ses gabarits, ses fichiers de traduction et sa documentation.
+
+
+1. UTILISATION AUTORISÉE
+
+L'utilisation du Logiciel est accordée gratuitement, sans limitation de durée, à toute
+personne physique ou morale, pour :
+
+   a) installer et exécuter le Logiciel sur une ou plusieurs instances de ClientXCMS,
+      y compris dans un cadre commercial et pour le compte de tiers ;
+
+   b) le configurer et l'exploiter en production, notamment au sein d'une activité
+      d'hébergement ou de prestation de services ;
+
+   c) en réaliser des copies de sauvegarde.
+
+Aucune redevance n'est due pour ces usages.
+
+
+2. RESTRICTIONS
+
+Sauf autorisation écrite préalable de Securost, il est interdit de :
+
+   a) modifier, adapter, traduire ou créer une œuvre dérivée du Logiciel ;
+
+   b) redistribuer, publier, revendre, louer, sous-licencier ou mettre à disposition
+      de tiers le Logiciel ou une partie substantielle de celui-ci, sous quelque forme
+      que ce soit ;
+
+   c) utiliser le Logiciel, en tout ou partie, pour interfacer un service de
+      supervision ou de page de statut autre que Supervio ;
+
+   d) retirer, masquer ou altérer les mentions de propriété, de droits d'auteur ou
+      d'attribution figurant dans le Logiciel.
+
+La restriction 2.c ne fait pas obstacle au réglage de l'adresse de l'API prévu par le
+Logiciel, dès lors qu'il désigne une instance Supervio, y compris auto-hébergée.
+
+
+3. ADAPTATIONS TECHNIQUES
+
+Par dérogation à l'article 2.a, sont autorisées sans accord préalable les
+modifications strictement nécessaires à la compatibilité du Logiciel avec une version
+de ClientXCMS ou de PHP, à condition qu'elles ne soient pas redistribuées et que
+Securost en soit informé.
+
+
+4. PUBLICATION PAR CLIENTXCMS
+
+Securost accorde à l'association CLIENTXCMS le droit non exclusif de distribuer le
+Logiciel via ses canaux officiels — catalogue d'extensions, dépôt, documentation —
+sous la présente licence et sans modification de celle-ci.
+
+
+5. PROPRIÉTÉ ET MARQUES
+
+Le Logiciel demeure la propriété de Securost. La présente licence ne confère aucun
+droit sur les marques, noms commerciaux, logos ou éléments d'identité de Securost ou
+de Supervio.
+
+
+6. ABSENCE DE GARANTIE
+
+LE LOGICIEL EST FOURNI « EN L'ÉTAT », SANS GARANTIE D'AUCUNE SORTE, EXPRESSE OU
+IMPLICITE, NOTAMMENT SANS GARANTIE DE QUALITÉ MARCHANDE, D'ADÉQUATION À UN USAGE
+PARTICULIER OU D'ABSENCE DE CONTREFAÇON.
+
+Le Logiciel dépend d'une interface de programmation tierce (l'API Supervio) dont la
+disponibilité, le contenu et le comportement ne sont pas garantis par la présente
+licence.
+
+
+7. LIMITATION DE RESPONSABILITÉ
+
+EN AUCUN CAS SECUROST NE POURRA ÊTRE TENU RESPONSABLE D'UN QUELCONQUE DOMMAGE, DIRECT
+OU INDIRECT, Y COMPRIS PERTE DE DONNÉES, PERTE D'EXPLOITATION OU INTERRUPTION DE
+SERVICE, RÉSULTANT DE L'UTILISATION OU DE L'IMPOSSIBILITÉ D'UTILISER LE LOGICIEL.
+
+
+8. RÉSILIATION
+
+Tout manquement aux articles 2 ou 5 met fin de plein droit et sans formalité aux
+droits accordés par la présente licence. Le Logiciel doit alors être désinstallé et
+ses copies détruites.
+
+
+9. DROIT APPLICABLE
+
+La présente licence est régie par le droit français. Tout litige relatif à sa
+validité, son interprétation ou son exécution relève de la compétence des tribunaux
+français.
+
+
+Pour toute demande d'autorisation, de partenariat ou de support :
+contact@securost.com — https://supervio.fr
