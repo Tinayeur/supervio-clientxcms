@@ -18,26 +18,40 @@ navigateur de vos visiteurs.
 L'addon **ne crée aucune table** : ses réglages vivent dans la table `settings` de
 ClientXCMS. Il s'installe donc sans migration et se désinstalle sans résidu de schéma.
 
-## Installation
+## Structure du dépôt
 
-```bash
-cd addons/
-git clone <URL_DU_DEPOT> supervio
-cd supervio
-composer install --no-dev
+Ce dépôt reproduit l'arborescence de ClientXCMS : l'addon vit sous `addons/supervio/`.
+C'est ce que l'installateur attend — l'archive est déversée sur la racine du projet,
+après suppression de `README.md`, `LICENSE`, `CHANGELOG.md` et `.gitignore`, qui
+restent donc à la racine du dépôt sans jamais être installés.
+
+```
+addons/supervio/     l'addon
+README.md            documentation, non installée
+LICENSE              conditions d'utilisation, non installée
+CHANGELOG.md         journal des versions, non installé
 ```
 
-Puis, depuis la racine de ClientXCMS :
+## Installation
+
+Depuis le catalogue d'extensions de ClientXCMS — voie recommandée : recherchez
+**Supervio** dans **Réglages › Extensions** et installez-le.
+
+Installation manuelle, depuis la racine de votre ClientXCMS :
 
 ```bash
+git clone <URL_DU_DEPOT> /tmp/supervio
+cp -r /tmp/supervio/addons/supervio addons/
+rm -rf /tmp/supervio
+composer install --no-dev -d addons/supervio
 php artisan optimize:clear
 ```
 
 Activez ensuite l'addon dans **Réglages › Extensions**.
 
-> Les fichiers doivent appartenir à l'utilisateur qui exécute PHP-FPM. Après un
-> `git clone` lancé en root, pensez à rétablir le propriétaire, sinon l'application
-> ne pourra ni lire ni écrire dans le dossier.
+> Les fichiers doivent appartenir à l'utilisateur qui exécute PHP-FPM. Après une
+> copie lancée en root, pensez à rétablir le propriétaire, sinon l'application ne
+> pourra ni lire ni écrire dans le dossier.
 
 ## Configuration
 
@@ -153,16 +167,16 @@ symbolique `public/storage` doit exister pour que les logos téléversés soient
 
 ## Ressources graphiques
 
-Le dossier `assets/` contient les visuels de l'addon, à destination du catalogue
+Le dossier `addons/supervio/assets/` contient les visuels de l'addon, à destination du catalogue
 d'extensions :
 
 | Fichier | Dimensions | Usage |
 |---|---|---|
-| `assets/logo.png` | 1024 × 1024, PNG transparent | icône de l'extension |
-| `assets/banniere.png` | 1920 × 1080, PNG | bannière de la fiche catalogue |
+| `addons/supervio/assets/logo.png` | 1024 × 1024, PNG transparent | icône de l'extension |
+| `addons/supervio/assets/banniere.png` | 1920 × 1080, PNG | bannière de la fiche catalogue |
 
 Le champ `thumbnail` de `addon.json` pointe vers le logo hébergé sur
-`supervio.fr`. Les fichiers de `assets/` restent fournis pour que le catalogue
+`supervio.fr`. Les fichiers d'`assets/` restent fournis pour que le catalogue
 ClientXCMS puisse les héberger lui-même s'il le préfère.
 
 La bannière n'est pas encore déclarée : aucun champ de la convention ClientXCMS ne
