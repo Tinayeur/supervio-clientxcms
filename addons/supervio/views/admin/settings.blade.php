@@ -29,7 +29,7 @@
             @endif
         </div>
 
-        <div class="grid gap-4 md:grid-cols-2">
+        <div class="md:max-w-md">
             <div>
                 {{--
                     Champ de clé API construit à la main plutôt que via
@@ -87,14 +87,6 @@
                     <span class="mt-2 text-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>
-            <div>
-                @include('admin/shared/input', [
-                    'name' => 'supervio_api_url',
-                    'label' => __('supervio::messages.admin.fields.api_url'),
-                    'value' => setting('supervio_api_url', 'https://supervio.fr/api/v1'),
-                    'help' => __('supervio::messages.admin.fields.api_url_help'),
-                ])
-            </div>
         </div>
 
         <div class="mt-4 flex flex-wrap items-center gap-3">
@@ -144,20 +136,17 @@
                 @endif
             </div>
 
-            {{-- L'adresse ne dépend pas de l'API : elle reste modifiable même
-                 quand la liste des status pages est vide. Auparavant elle était
-                 enfermée dans la même condition, et restait donc inaccessible
-                 lors de la toute première configuration. --}}
+            {{-- L'adresse est fixe : elle est affichée pour information, pas
+                 saisie. Elle construit une route chargée au démarrage de
+                 l'application, et une valeur libre enregistrée par erreur
+                 empêchait tout le site de répondre. --}}
             <div>
-                    <label for="supervio_page_slug" class="block text-sm font-medium text-gray-900 dark:text-gray-400">
+                    <span class="block text-sm font-medium text-gray-900 dark:text-gray-400">
                         {{ __('supervio::messages.admin.fields.slug') }}
-                    </label>
-                    <div class="mt-1 flex items-center gap-2">
-                        <span class="shrink-0 text-sm text-gray-400">{{ url('/') }}/</span>
-                        <input type="text" name="supervio_page_slug" id="supervio_page_slug"
-                               value="{{ $slug }}" pattern="[a-z0-9\-]+"
-                               class="w-full rounded-lg border-gray-300 text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                    </div>
+                    </span>
+                    <p class="mt-1 rounded-lg bg-gray-50 px-3 py-2 font-mono text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                        {{ url('/'.$slug) }}
+                    </p>
                     <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
                         {{ __('supervio::messages.admin.fields.slug_help') }}
                     </p>
@@ -224,7 +213,6 @@
                une chaîne vide, et le contrôleur teste la clé stockée. */
             body: JSON.stringify({
                 supervio_api_key: document.getElementById('supervio_api_key')?.value ?? '',
-                supervio_api_url: document.querySelector('[name="supervio_api_url"]')?.value ?? '',
             }),
         })
             .then(r => r.json())

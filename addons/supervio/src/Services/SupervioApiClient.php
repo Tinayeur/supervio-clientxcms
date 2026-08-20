@@ -33,7 +33,15 @@ use Illuminate\Support\Facades\Log;
 
 class SupervioApiClient
 {
-    public const URL_PAR_DEFAUT = 'https://supervio.fr/api/v1';
+    /**
+     * Adresse de l'API, constante et non configurable.
+     *
+     * Le service est hébergé par Supervio : il n'existe pas d'instance
+     * auto-hébergée vers laquelle pointer. Exposer ce champ n'apportait donc
+     * rien, et offrait un moyen de faire partir la clé API vers un serveur
+     * arbitraire — la seule chose que ce réglage permettait vraiment.
+     */
+    public const URL = 'https://supervio.fr/api/v1';
 
     /** Garde-fou : évite de boucler sur un curseur qui ne se terminerait pas. */
     private const MAX_PAGES = 25;
@@ -42,17 +50,14 @@ class SupervioApiClient
 
     public function __construct(
         private string $cle,
-        private string $baseUrl = self::URL_PAR_DEFAUT,
-    ) {
-        $this->baseUrl = rtrim($this->baseUrl, '/');
-    }
+    ) {}
 
     /** Instance construite depuis les réglages enregistrés. */
     public static function depuisReglages(): ?self
     {
         $cle = SupervioSettings::cle();
 
-        return $cle === null ? null : new self($cle, SupervioSettings::baseUrl());
+        return $cle === null ? null : new self($cle);
     }
 
     /**
@@ -80,7 +85,7 @@ class SupervioApiClient
     public function testerConnexion(): array
     {
         try {
-            $r = Http::withHeaders($this->entetes())->timeout(self::TIMEOUT)->get($this->baseUrl.'/me');
+            $r = Http::withHeaders($this->entetes())->timeout(self::TIMEOUT)->get(self::URL.'/me');
         } catch (\Throwable $e) {
             $this->journaliser('/me', $e->getMessage());
 
@@ -235,7 +240,7 @@ class SupervioApiClient
         try {
             return Http::withHeaders($this->entetes())
                 ->timeout(self::TIMEOUT)
-                ->get($this->baseUrl.$endpoint, $query);
+                ->get(self::URL.$endpoint, $query);
         } catch (\Throwable $e) {
             $this->journaliser($endpoint, $e->getMessage());
 

@@ -65,7 +65,10 @@ L'addon ajoute une carte **Supervio** dans les Paramètres, avec deux écrans.
    *Tester la connexion*. Le compte et l'abonnement détectés s'affichent.
 2. **Status page à publier** — la liste est récupérée depuis votre compte. Tant
    qu'aucune page n'est sélectionnée, l'adresse publique reste en 404.
-3. **Adresse de la page** — le segment d'URL, `statut` par défaut.
+
+La page est servie sur `/statut`, et `/status` y redirige en 301. Cette adresse
+est fixe : elle construit une route chargée à chaque requête, et une valeur libre
+enregistrée par erreur empêchait le site entier de répondre.
 
 Une fois la clé enregistrée, aucun champ de saisie n'est affiché : cliquez sur
 *Remplacer la clé* pour en changer. Cela évite qu'un gestionnaire de mots de passe du

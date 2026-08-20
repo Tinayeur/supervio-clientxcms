@@ -101,7 +101,7 @@ return [
         'save_key_first' => 'Save your API key first: the list of your status pages will be fetched afterwards.',
         'no_pages' => 'No status page found on this account. Create one on supervio.fr, then test the connection again.',
         'section_page' => 'Published page',
-        'section_page_help' => 'Pick the Supervio status page to publish, and the address it is served at.',
+        'section_page_help' => 'Pick the Supervio status page to publish. It is served at the address shown below.',
         'section_look' => 'Appearance',
 
         'fields' => [
@@ -109,7 +109,7 @@ return [
             'logo_file_help' => 'PNG, JPG or WebP, 1 MB max. Takes precedence over the link below.',
             'logo_remove' => 'Remove current logo',
             'slug' => 'Page address',
-            'slug_help' => 'Lowercase letters, digits and hyphens. The page is served at this address; /status redirects there automatically.',
+            'slug_help' => 'Fixed address, not editable. /status redirects there automatically.',
             'view_page' => 'View page',
             'page_title' => 'Displayed title',
             'page_title_help' => 'Leave empty to reuse the title defined on Supervio.',
@@ -126,8 +126,6 @@ return [
             'api_key_replace' => 'Replace the key',
             'api_key_replace_warning' => 'Leave empty to keep the current key. Anything entered here replaces it permanently.',
             'api_key_help' => 'Generated on supervio.fr. Encrypted at rest and never shown again: leave empty to keep the current key. This key grants access to your account — never share it.',
-            'api_url' => 'API address',
-            'api_url_help' => 'Change only for a self-hosted Supervio instance.',
             'status_page' => 'Status page to publish',
             'history' => 'History depth',
             'history_help' => 'Your plan allows :jours days.',

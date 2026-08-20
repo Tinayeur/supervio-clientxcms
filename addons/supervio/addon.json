@@ -2,7 +2,7 @@
     "name": "Supervio",
     "description": "Publie sur votre ClientXCMS une page de statut alimentée en direct par votre compte Supervio : services supervisés, disponibilité et incidents. Rendu natif côté serveur, la clé API ne quitte jamais l'hébergement.",
     "uuid": "supervio",
-    "version": "1.0",
+    "version": "1.1",
     "icon": "bi bi-activity",
     "thumbnail": "https://supervio.fr/supervio-discord-1024.png",
     "author": {

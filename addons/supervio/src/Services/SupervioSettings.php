@@ -21,11 +21,7 @@ class SupervioSettings
 {
     public const CLE = 'supervio_api_key';
 
-    public const BASE_URL = 'supervio_api_url';
-
     public const PAGE_ID = 'supervio_status_page_id';
-
-    public const SLUG = 'supervio_page_slug';
 
     public const TITRE = 'supervio_page_title';
 
@@ -112,13 +108,6 @@ class SupervioSettings
         return self::cle() !== null && self::pageId() !== null;
     }
 
-    public static function baseUrl(): string
-    {
-        $url = trim((string) setting(self::BASE_URL, ''));
-
-        return $url !== '' ? $url : SupervioApiClient::URL_PAR_DEFAUT;
-    }
-
     public static function pageId(): ?string
     {
         $id = trim((string) setting(self::PAGE_ID, ''));
@@ -126,34 +115,20 @@ class SupervioSettings
         return $id !== '' ? $id : null;
     }
 
-    /** Slug par défaut de la page publique. Modifiable dans les réglages. */
-    public const SLUG_DEFAUT = 'statut';
-
     /**
      * Segment d'URL de la page publique.
      *
-     * Nettoyé à la lecture ET à l'écriture : ce slug construit une route, une
-     * valeur fantaisiste enregistrée par erreur casserait le démarrage de
-     * l'application pour tout le monde, pas seulement cette page.
+     * Constante, et non un réglage : ce slug construit une route chargée au
+     * démarrage de l'application. Une valeur fantaisiste enregistrée par erreur
+     * ne cassait pas seulement cette page, elle empêchait tout le site de
+     * répondre. Le gain — choisir son adresse — ne valait pas ce risque, et la
+     * redirection depuis /status couvre l'usage anglophone.
      */
+    public const SLUG = 'statut';
+
     public static function slug(): string
     {
-        $slug = self::assainirSlug((string) setting(self::SLUG, ''));
-
-        return $slug !== '' ? $slug : self::SLUG_DEFAUT;
-    }
-
-    /**
-     * Nettoie un slug saisi à la main.
-     *
-     * Str::slug() translittère les accents (« état » devient « etat ») là où un
-     * simple filtrage de caractères les supprimerait : « état-des-services »
-     * serait devenu « tat-des-services », silencieusement. Sur un site
-     * francophone, c'est le cas courant, pas le cas limite.
-     */
-    public static function assainirSlug(string $brut): string
-    {
-        return \Str::slug(trim($brut, " \t\n\r\0\x0B/"));
+        return self::SLUG;
     }
 
     public static function titre(): ?string

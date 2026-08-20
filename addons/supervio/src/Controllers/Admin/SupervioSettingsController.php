@@ -3,8 +3,12 @@
 /*
  * Addon Supervio pour ClientXCMS.
  *
- * Écran 1 : connexion à Supervio et adresse de la page publique.
+ * Écran 1 : clé API Supervio et choix de la status page à publier.
  * Se remplit une fois, on n'y revient plus.
+ *
+ * L'adresse de l'API et celle de la page publique ne sont pas configurables :
+ * ce sont des constantes du code. Voir SupervioApiClient::URL et
+ * SupervioSettings::SLUG pour les raisons.
  *
  * La clé API n'est jamais renvoyée au navigateur. Le champ du formulaire part
  * toujours vide ; un envoi vide signifie « conserver la clé actuelle ».
@@ -44,9 +48,7 @@ class SupervioSettingsController extends Controller
 
         $donnees = $request->validate([
             'supervio_api_key' => ['nullable', 'string', 'max:255'],
-            'supervio_api_url' => ['nullable', 'url', 'max:255'],
             'supervio_status_page_id' => ['nullable', 'string', 'max:64'],
-            'supervio_page_slug' => ['nullable', 'string', 'max:60'],
         ]);
 
         $cleAvant = SupervioSettings::cle();
@@ -57,26 +59,14 @@ class SupervioSettingsController extends Controller
             SupervioSettings::enregistrerCle(trim((string) $request->input('supervio_api_key')));
         }
 
-        /* Le slug est assaini avant écriture, pas seulement à la lecture : une
-           valeur invalide en base reste une bombe à retardement pour quiconque
-           lit ce réglage sans passer par l'accesseur. */
-        $slug = SupervioSettings::assainirSlug((string) ($donnees['supervio_page_slug'] ?? ''));
-
         Setting::updateSettings([
-            SupervioSettings::BASE_URL => $donnees['supervio_api_url'] ?? SupervioApiClient::URL_PAR_DEFAUT,
             SupervioSettings::PAGE_ID => $donnees['supervio_status_page_id'] ?? '',
-            SupervioSettings::SLUG => $slug !== '' ? $slug : SupervioSettings::SLUG_DEFAUT,
         ]);
 
         PlanGate::oublier($cleAvant);
         PlanGate::oublier();
         StatusPageAssembler::oublier();
         Cache::forget('supervio:pages_disponibles');
-
-        /* Le slug construit une route : elle n'existera sous sa nouvelle forme
-           qu'après vidage du cache de routes. Sans ça, l'administrateur
-           enregistre, clique sur le lien, et tombe sur un 404. */
-        $this->viderCacheDeRoutes();
 
         return redirect()
             ->route('admin.settings.supervio')
@@ -95,13 +85,12 @@ class SupervioSettingsController extends Controller
         staff_aborts_permission(Permission::MANAGE_EXTENSIONS);
 
         $cle = trim((string) $request->input('supervio_api_key')) ?: SupervioSettings::cle();
-        $base = trim((string) $request->input('supervio_api_url')) ?: SupervioSettings::baseUrl();
 
         if (blank($cle)) {
             return response()->json(['ok' => false, 'message' => __('supervio::messages.admin.test.no_key')]);
         }
 
-        $resultat = (new SupervioApiClient($cle, $base))->testerConnexion();
+        $resultat = (new SupervioApiClient($cle))->testerConnexion();
 
         if (! $resultat['ok']) {
             return response()->json([
@@ -151,16 +140,5 @@ class SupervioSettingsController extends Controller
         }
 
         return $liste;
-    }
-
-    private function viderCacheDeRoutes(): void
-    {
-        try {
-            if (file_exists(app()->getCachedRoutesPath())) {
-                \Artisan::call('route:clear');
-            }
-        } catch (\Throwable $e) {
-            \Log::warning('[supervio] vidage du cache de routes en échec', ['erreur' => $e->getMessage()]);
-        }
     }
 }

@@ -83,7 +83,7 @@ class PlanGate
         $me = Cache::remember(
             'supervio:plan:'.md5($cle),
             self::TTL,
-            fn () => (new SupervioApiClient($cle, SupervioSettings::baseUrl()))->me()
+            fn () => (new SupervioApiClient($cle))->me()
         );
 
         if (! is_array($me)) {

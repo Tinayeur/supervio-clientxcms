@@ -101,7 +101,7 @@ return [
         'save_key_first' => "Enregistrez d'abord votre clé API : la liste de vos status pages sera récupérée ensuite.",
         'no_pages' => "Aucune status page n'a été trouvée sur ce compte. Créez-en une sur supervio.fr, puis testez à nouveau la connexion.",
         'section_page' => 'Page publiée',
-        'section_page_help' => "Choisissez la status page Supervio à publier, et l'adresse à laquelle elle sera servie.",
+        'section_page_help' => "Choisissez la status page Supervio à publier. Elle sera servie à l'adresse indiquée ci-dessous.",
         'section_look' => 'Apparence',
 
         'fields' => [
@@ -109,7 +109,7 @@ return [
             'logo_file_help' => 'PNG, JPG ou WebP, 1 Mo maximum. Remplace le lien ci-dessous.',
             'logo_remove' => 'Supprimer le logo actuel',
             'slug' => 'Adresse de la page',
-            'slug_help' => "Lettres minuscules, chiffres et tirets. La page sera servie à cette adresse ; /status y redirige automatiquement.",
+            'slug_help' => "Adresse fixe, non modifiable. /status y redirige automatiquement.",
             'view_page' => 'Voir la page',
             'page_title' => 'Titre affiché',
             'page_title_help' => "Laisser vide pour reprendre le titre défini sur Supervio.",
@@ -126,8 +126,6 @@ return [
             'api_key_replace' => 'Remplacer la clé',
             'api_key_replace_warning' => "Laissez vide pour conserver la clé actuelle. Toute valeur saisie ici la remplacera définitivement.",
             'api_key_help' => 'Générée sur supervio.fr. Chiffrée en base et jamais réaffichée : laissez vide pour conserver la clé actuelle. Cette clé donne accès à votre compte, ne la partagez avec personne.',
-            'api_url' => "Adresse de l'API",
-            'api_url_help' => 'À ne modifier que pour une instance Supervio auto-hébergée.',
             'status_page' => 'Status page à publier',
             'history' => "Profondeur d'historique",
             'history_help' => 'Votre abonnement autorise :jours jours.',
